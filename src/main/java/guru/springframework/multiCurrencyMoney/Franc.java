@@ -1,21 +1,9 @@
 package guru.springframework.multiCurrencyMoney;
 
 public class Franc extends Money{
-	
-	public Franc (int amount) {
-		this.amount = amount;
+
+	public Franc (int amount, String currency) {
+		super(amount, currency);
 	}
-	
-	public Money times(int multiplier) {
-		return new Franc(amount*multiplier);
-	}
-	
-	//Getters And Setters
-	public double getAmount() {
-		return amount;
-	}
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
-	
+
 }
