@@ -41,6 +41,15 @@ public class MoneyTest {
 		assertEquals("CHF", Money.createFranc(1).currency());
 		
 	}
+	
+	@Test
+	void testSimpleAddition() {
+		Money five = Money.createDollar(5);
+		Expression sum = five.plus(five);
+		Bank bank = new Bank();
+		Money reduced = bank.reduce(sum, "USD");
+		assertEquals(Money.createDollar(10), reduced);
+	}
 	@Override
 	public String toString() {
 		return "MoneyTest [getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
