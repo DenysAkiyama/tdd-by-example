@@ -80,6 +80,31 @@ public class MoneyTest {
 	}
 	
 	@Test
+	public void testSumPlusMoney() {
+		Expression fiveBucks = Money.createDollar(5);
+		Expression tenFrancs = Money.createFranc(10);
+		
+		Bank bank = new Bank();
+		bank.addRate("CHF", "USD", 2);
+		Expression sum = new Sum(fiveBucks, tenFrancs).plus(fiveBucks);
+		Money result = bank.reduce(sum, "USD");
+		
+		assertEquals(Money.createDollar(15), result);
+	}
+	
+	@Test
+	public void testSumTimes() {
+		Expression fiveBucks = Money.createDollar(5);
+		Expression tenFrancs = Money.createFranc(10);
+		Bank bank = new Bank();
+		bank.addRate("CHF", "USD", 2);
+		Expression sum = new Sum(fiveBucks, tenFrancs).times(2);
+		Money result = bank.reduce(sum, "USD");
+		
+		assertEquals(Money.createDollar(20), result);
+	}
+	
+	@Test
 	void testIdentityRate() {
 		assertEquals(1, new Bank().rate("USD", "USD"));
 		assertEquals(1, new Bank().rate("CHF", "CHF"));

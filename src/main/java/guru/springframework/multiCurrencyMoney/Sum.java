@@ -20,7 +20,11 @@ public class Sum implements Expression {
 
 	@Override
 	public Expression plus(Expression addend) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Sum(this, addmend);
+	}
+
+	@Override
+	public Expression times(int multiplier) {
+		return new Sum(augmend.times(multiplier), addmend.times(multiplier));
 	}
 }
