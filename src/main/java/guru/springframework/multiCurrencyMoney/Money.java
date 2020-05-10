@@ -29,12 +29,30 @@ public class Money implements Expression{
 				&& currency == money.currency;
 		
 	}
+	
+	@Override
+	public Money reduce(Bank bank, String toCurrency) {
+//		int rate = (currency.equals("CHF") && toCurrency.equals("USD")) ? 2 : 1;
+//		return this;
+		return new Money(amount / bank.rate(this.currency, toCurrency), toCurrency);
+	}
+
+	@Override
+	public String toString() {
+		return "Money{" +
+				"amount=" + amount +
+				", currency='" + currency + '\''+
+				'}';
+	}
+
 
 	public Money times(int multiplier) {
 		return new Money(amount*multiplier, this.currency);
 	}
 	
 	public Expression plus(Money addend) {
-		return new Money(amount + addend.amount, currency);
+		return new Sum(this, addend);
 	}
+
+
 }
